@@ -8,6 +8,8 @@
 // 해당 프로젝트와 문서 코드를 공유하도록 해 줍니다.
 #ifndef SHARED_HANDLERS
 #include "MFCApplication6.h"
+#include <afxwin.h>
+#include "resource.h"
 #endif
 
 #include "MFCApplication6Doc.h"
@@ -38,8 +40,14 @@ END_MESSAGE_MAP()
 
 CMFCApplication6View::CMFCApplication6View() noexcept
 {
-	// TODO: 여기에 생성 코드를 추가합니다.
+	// TODO: 여기에 생성 코드를 추가합니다..
+	MessageBox(_T("안녕하세요, 환경에 일조하조입니다."));
 
+	if (AfxMessageBox(_T("분리수거 게임을 시작하시겠습니까?",), MB_YESNO | MB_ICONQUESTION) == IDNO)
+		exit(0);
+		
+	
+	
 	for (size_t i = 0; i <= 9; i++) {
 		obj[i] = CRectObject(CPoint(100 * (i +1), 600), 50, 50);
 	}
@@ -47,6 +55,7 @@ CMFCApplication6View::CMFCApplication6View() noexcept
 	m_index = -1;
 	num = 1;
 	str.Format(L"현재 점수: %d", num);
+	
 }
 
 CMFCApplication6View::~CMFCApplication6View()
@@ -104,11 +113,11 @@ void CMFCApplication6View::OnDraw(CDC* pDC)
 	str.Format(L"현재 점수: %d", num);
 	*/
 
-	CBrush brush1(RGB(255, 0, 0)); //쓰레기통 좌표 알기 위한 사각형
+	/*CBrush brush1(RGB(255, 0, 0)); //쓰레기통 좌표 알기 위한 사각형
 	CBrush* c_brush;
 	c_brush = pDC->SelectObject(&brush1);
 	pDC->Rectangle(50, 50, 300, 450);
-
+	*/
 }
 
 
@@ -173,6 +182,7 @@ void CMFCApplication6View::OnLButtonDown(UINT nFlags, CPoint point)
 	}
 	Invalidate();
 	CView::OnLButtonDown(nFlags, point);
+	
 }
 
 
@@ -191,8 +201,18 @@ void CMFCApplication6View::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	
-	if (obj[1].m_pos.x <= 350 && obj[1].m_pos.x >= 50 &&
-		obj[1].m_pos.y <= 450 && obj[1].m_pos.y >= 50) {
+	if (obj[1].m_pos.x <= 300 && obj[1].m_pos.x >= 50 &&
+		obj[1].m_pos.y <= 445 && obj[1].m_pos.y >= 50 ||
+		obj[2].m_pos.x <= 600 && obj[2].m_pos.x >= 350 &&
+		obj[2].m_pos.y <= 445 && obj[2].m_pos.y >= 50 ||
+		obj[3].m_pos.x <= 900 && obj[3].m_pos.x >= 650 &&
+		obj[3].m_pos.y <= 445 && obj[3].m_pos.y >= 50 ||
+		obj[4].m_pos.x <= 1200 && obj[4].m_pos.x >= 950 &&
+		obj[4].m_pos.y <= 445 && obj[4].m_pos.y >= 50 ||
+		obj[5].m_pos.x <= 1500 && obj[5].m_pos.x >= 1250 &&
+		obj[5].m_pos.y <= 445 && obj[5].m_pos.y >= 50 ||
+		obj[6].m_pos.x <= 1800 && obj[6].m_pos.x >= 1550 &&
+		obj[6].m_pos.y <= 445 && obj[6].m_pos.y >= 50) {
 		num = num + 1;
 		str.Format(L"현재 점수: %d", num);
 		obj[1] = CRectObject(CPoint(0, 0), 0, 0);
@@ -206,4 +226,7 @@ void CMFCApplication6View::OnLButtonUp(UINT nFlags, CPoint point)
 	}
 	m_index = -1;
 	CView::OnLButtonUp(nFlags, point);
+	if (num >= 6)
+		if (AfxMessageBox(_T("성공했습니다 게임을 나가시겠습니까?", ), MB_YESNO | MB_ICONQUESTION) == IDYES)
+			exit(0);
 }
