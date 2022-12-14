@@ -41,14 +41,26 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	//bool m_selected;
-	CRectObject obj[10];
+	CRectObject obj[13];
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	int m_index;
 	int num;
+	int order;
+	int m_stack;
 	CString str;
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
-	CImage back;
+	
+	CImage		TrashCan[6];
+	CRect		rcTrashCan[6] = {
+		CRect(50, 50, 0, 0),
+		CRect(350, 50, 0, 0),
+		CRect(650, 50, 0, 0),
+		CRect(950, 50, 0, 0),
+		CRect(1250, 50, 0, 0),
+		CRect(1550, 50, 0, 0),
+	};
+
 };
 
 #ifndef _DEBUG  // MFCApplication6View.cpp의 디버그 버전
