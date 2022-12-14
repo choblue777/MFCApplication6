@@ -3,16 +3,19 @@
 CRectObject::CRectObject() {
 
 }
-CRectObject::CRectObject(CPoint pt, int w, int h) {
+CRectObject::CRectObject(CPoint pt, int w, int h, CString pa, CString na) {
 	m_pos = pt;
 	m_width = w;
 	m_height = h;
 	m_selected = false;
+	m_path = pa;
+	m_name = na;
 }
+
 
 bool CRectObject::CheckSelected(CPoint pt)
 {
-	// TODO: ø©±‚ø° ±∏«ˆ ƒ⁄µÂ √ﬂ∞°.
+	// TODO: Ïó¨Í∏∞Ïóê Íµ¨ÌòÑ ÏΩîÎìú Ï∂îÍ∞Ä.
 	if (m_pos.x <= pt.x && pt.x <= m_pos.x+m_width
 		&& m_pos.y <= pt.y && pt.y <= m_pos.y+m_height) {
 		m_selected = true;
@@ -26,7 +29,7 @@ bool CRectObject::CheckSelected(CPoint pt)
 
 void CRectObject::Draw(CDC* pDC)
 {
-	// TODO: ø©±‚ø° ±∏«ˆ ƒ⁄µÂ √ﬂ∞°.
+	// TODO: Ïó¨Í∏∞Ïóê Íµ¨ÌòÑ ÏΩîÎìú Ï∂îÍ∞Ä.
 	/*
 	CPen pen(PS_SOLID, 2, RGB(255, 0, 0));
 	if (m_selected) {
@@ -36,5 +39,19 @@ void CRectObject::Draw(CDC* pDC)
 		pDC->SelectObject(GetStockObject(BLACK_PEN));
 	}
 	*/
-	pDC->Rectangle(m_pos.x, m_pos.y, m_pos.x+m_width, m_pos.y+m_height);
+	CImage img;
+	img.Load(m_path);  // Í≤ΩÎ°ú ÏßÄÏ†ï ÏúÑÌï¥
+	img.Draw(*pDC, m_pos.x, m_pos.y);
+
+	pDC->DrawText(m_name, CRect(m_pos.x, m_pos.y+100, m_pos.x+100, m_pos.y+150), DT_CENTER);  //ÌÖçÏä§Ìä∏ ÏßÄÏ†ï ÏúÑÌï¥
+
+	//pDC->Rectangle(m_pos.x, m_pos.y, m_pos.x+m_width, m_pos.y+m_height);
+}
+
+bool CRectObject::IsCollide(CRect& other)
+{
+	CRect rcResult;
+	CRect rcMy(m_pos, CPoint(m_pos.x + m_width, m_pos.y + m_height));
+
+	return rcResult.IntersectRect(&rcMy, &other);
 }
