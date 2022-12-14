@@ -3,14 +3,17 @@
 class CRectObject
 {
 public:
-	CPoint m_pos; //»ç°¢ÇüÀÇ À§Ä¡. ÁÂÃø »ó´Ü ²ÀÁöÁ¡ÀÇ ÁÂÇ¥
-	int m_width; // »ç°¢ÇüÀÇ °¡·Î ±æÀÌ
-	int m_height; // »ç°¢ÇüÀÇ ¼¼·Î ³ôÀÌ
-	bool m_selected; //»ç°¢ÇüÀÌ ¼±ÅÃ µÇ¾ú´ÂÁö ¿©ºÎ¸¦ ³ªÅ¸³»´Â ÇÃ·¡±×
+	CPoint m_pos; //ì‚¬ê°í˜•ì˜ ìœ„ì¹˜. ì¢Œì¸¡ ìƒë‹¨ ê¼­ì§€ì ì˜ ì¢Œí‘œ
+	int m_width; // ì‚¬ê°í˜•ì˜ ê°€ë¡œ ê¸¸ì´
+	int m_height; // ì‚¬ê°í˜•ì˜ ì„¸ë¡œ ë†’ì´
+	bool m_selected; //ì‚¬ê°í˜•ì´ ì„ íƒ ë˜ì—ˆëŠ”ì§€ ì—¬ë¶€ë¥¼ ë‚˜íƒ€ë‚´ëŠ” í”Œë˜ê·¸
 public:
 	CRectObject();
-	CRectObject(CPoint pt, int w, int h); // 
-	bool CheckSelected(CPoint pt); // pt ÁÂÇ¥°¡ »ç°¢Çü ³»ºÎÀÎÁö Ã¼Å©.
-	void Draw(CDC* pDC); //pDC¿¡ »ç°¢Çü ±×¸®±â
+	CRectObject(CPoint pt, int w, int h, CString pa, CString na); // 
+	bool CheckSelected(CPoint pt); // pt ì¢Œí‘œê°€ ì‚¬ê°í˜• ë‚´ë¶€ì¸ì§€ ì²´í¬.
+	void Draw(CDC* pDC); //pDCì— ì‚¬ê°í˜• ê·¸ë¦¬ê¸°
+	CString m_path;  // ì´ë¯¸ì§€ ê²½ë¡œ
+	CString m_name;  // ì´ë¦„
+	bool IsCollide(CRect& other); // 11
 };
 
