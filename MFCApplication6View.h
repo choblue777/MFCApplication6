@@ -54,11 +54,11 @@ public:
 	CImage		TrashCan[6];
 	CRect		rcTrashCan[6] = {
 		CRect(50, 50, 0, 0),
-		CRect(350, 50, 0, 0),
-		CRect(650, 50, 0, 0),
-		CRect(950, 50, 0, 0),
-		CRect(1250, 50, 0, 0),
-		CRect(1550, 50, 0, 0),
+		CRect(300, 50, 0, 0),
+		CRect(550, 50, 0, 0),
+		CRect(800, 50, 0, 0),
+		CRect(1050, 50, 0, 0),
+		CRect(1300, 50, 0, 0),
 	};
 
 };
