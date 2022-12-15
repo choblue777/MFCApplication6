@@ -48,7 +48,7 @@ CMFCApplication6View::CMFCApplication6View() noexcept
 	CString na[13] = { L"페트병", L"알루미늄", L"가스", L"유리", L"바나나", L"수박", L"골판지", L"면도기", L"망치", L"우산", L"마우스", L"전화기", L"스텐" };  //이름 배열
 
 	for (size_t i = 0; i <13; i++) { 
-		obj[i] = CRectObject(CPoint(900, 600), 100, 100, pt[i], na[i]);
+		obj[i] = CRectObject(CPoint(750, 500), 100, 100, pt[i], na[i]);
 	}
 	m_stack = 0;
 	m_index = -1;
@@ -98,55 +98,22 @@ void CMFCApplication6View::OnDraw(CDC* pDC)
 		return;
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
-	/*
-	CImage e_w;
-	e_w.Load(L"./res/E-WASTE1-removebg.png");
-	e_w.Draw(pDC->m_hDC, 50, 50);
-
-	CImage gl;
-	gl.Load(L"./res/GLASS-removebg.png");
-	gl.Draw(pDC->m_hDC, 350, 50);
 	
-	CImage mt;
-	mt.Load(L"./res/METAL-removebg.png");
-	mt.Draw(pDC->m_hDC, 650, 50);
+	CImage wall;
+	wall.Load(L"./res/wall.png");
+	wall.Draw(pDC->m_hDC, 0, 0);
 
-	CImage og;
-	og.Load(L"./res/ORGANIC-removebg.png");
-	og.Draw(pDC->m_hDC, 950, 50);
-
-	CImage pp;
-	pp.Load(L"./res/PAPER-removebg.png");
-	pp.Draw(pDC->m_hDC, 1250, 50);
-
-	CImage ps;
-	ps.Load(L"./res/PLASTIC-removebg.png");
-	ps.Draw(pDC->m_hDC, 1550, 50);
-	*/
-	//11
 	for (int i = 0; i < 6; i++)
 	{
-		// 쓰레기통 그리기
 		CPoint& xy = rcTrashCan[i].TopLeft();
 		TrashCan[i].Draw(pDC->m_hDC, xy.x, xy.y);
 
-		// 테두리 그리기
 		pDC->SelectStockObject(NULL_BRUSH);
 		pDC->Rectangle(rcTrashCan[i]);
 	}
-	//
-	/*
-	for (size_t i = 0; i <13; i++) {
-		obj[i].Draw(pDC);
-	}
-	*/
+
 	obj[order].Draw(pDC);
 	pDC->TextOut(1000, 0, str);
-	/* 1점씩 추가되는 코드
-	 	num = num + 1;
-	str.Format(L"현재 점수: %d", num);
-	*/
-
 }
 
 
@@ -195,13 +162,7 @@ CMFCApplication6Doc* CMFCApplication6View::GetDocument() const // 디버그되�
 void CMFCApplication6View::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	//(100,200,300,300), (pint.x, point.y)
-	/*
-	if (100 <= point.x && point.x <= 300 && 200 <= point.y && point.y <= 300) {
-		m_selected = true;
-		Invalidate();
-	}
-	*/
+	
 	for (size_t i = 0; i < 13; i++) { //최대 9개까지 클릭했다는거 인지
 		if (obj[i].CheckSelected(point) == true) {
 			m_index = i;
@@ -217,7 +178,7 @@ void CMFCApplication6View::OnLButtonDown(UINT nFlags, CPoint point)
 void CMFCApplication6View::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	if (m_index != -1) { //클릭한 도형을 현재 마우스 좌표로 이동
+	if (m_index != -1) { 
 		obj[m_index].m_pos = point;
 		Invalidate(false);
 	}
@@ -229,46 +190,34 @@ void CMFCApplication6View::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	
-	if (obj[0].IsCollide(rcTrashCan[5]) || obj[1].IsCollide(rcTrashCan[3]))
+	if (obj[0].IsCollide(rcTrashCan[5]) || obj[1].IsCollide(rcTrashCan[2]) || obj[2].IsCollide(rcTrashCan[2]) ||
+		obj[3].IsCollide(rcTrashCan[1]) || obj[4].IsCollide(rcTrashCan[3]) || obj[5].IsCollide(rcTrashCan[3]) || 
+		obj[6].IsCollide(rcTrashCan[4]) || obj[7].IsCollide(rcTrashCan[0]) || obj[8].IsCollide(rcTrashCan[2]) ||
+		obj[9].IsCollide(rcTrashCan[2]) || obj[10].IsCollide(rcTrashCan[0]) || obj[11].IsCollide(rcTrashCan[0]) || obj[12].IsCollide(rcTrashCan[2]))
 	{
+		if (order >= 12) {
+			MessageBox(_T("수고하셨습니다."));
+			exit(0);
+		}
+
 		obj[order].m_pos.x = 0;
-		obj[order].m_pos.y = 0;
+		obj[order].m_pos.y = 750;
 		num= num + 1; // 점수 증가
-		order++;	
+		order++;
 		str.Format(L"현재 점수: %d", num);
 		Invalidate();
-		}
-	
-		/*
-	if (!obj[0].IsCollide(rcTrashCan[5]) || !obj[1].IsCollide(rcTrashCan[5]) || obj[2].IsCollide(rcTrashCan[5]) ||
-		obj[3].IsCollide(rcTrashCan[5]) || obj[4].IsCollide(rcTrashCan[5]) || obj[5].IsCollide(rcTrashCan[5]) ||
-		obj[6].IsCollide(rcTrashCan[5]) || obj[7].IsCollide(rcTrashCan[5]) || obj[8].IsCollide(rcTrashCan[5]) ||
-		obj[9].IsCollide(rcTrashCan[5]) || obj[10].IsCollide(rcTrashCan[5]) || obj[11].IsCollide(rcTrashCan[5]) ||
-		obj[12].IsCollide(rcTrashCan[5]))
-	{
-		obj[order].m_pos.x = 900;
-		obj[order].m_pos.y = 600;
-		AfxMessageBox(_T("틀렸습니다."));
-		Invalidate();
 	}
-	*/
-		/*
-		if (m_index == 0 || m_index == 2 || m_index == 3 || m_index == 4
-			|| m_index == 5 || m_index == 6 || m_index == 7 || m_index == 8 || m_index == 9)
-		{
-			obj[m_index] = CRectObject(CPoint(100 * (m_index + 1), 600), 50, 50); ;
-			Invalidate();
-		}
-		*/
+	
 	else {
-		obj[order].m_pos.x = 900;
-		obj[order].m_pos.y = 600;
+		obj[order].m_pos.x = 750;
+		obj[order].m_pos.y = 500;
 		AfxMessageBox(_T("다시"));
 		Invalidate();
 	}
-		
-		m_index = -1;
-	if (num >= 6)
+
+	m_index = -1;
+
+	if (num >= 13)
 		if (AfxMessageBox(_T("성공했습니다 게임을 나가시겠습니까?", ), MB_YESNO | MB_ICONQUESTION) == IDYES)
 			exit(0);
 	CView::OnLButtonUp(nFlags, point);
