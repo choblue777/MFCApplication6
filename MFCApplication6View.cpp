@@ -211,7 +211,7 @@ void CMFCApplication6View::OnLButtonUp(UINT nFlags, CPoint point)
 	else {
 		obj[order].m_pos.x = 750;
 		obj[order].m_pos.y = 500;
-		AfxMessageBox(_T("다시"));
+		AfxMessageBox(_T("다시 시도해주세요."));
 		Invalidate();
 	}
 
