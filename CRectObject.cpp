@@ -30,20 +30,11 @@ bool CRectObject::CheckSelected(CPoint pt)
 void CRectObject::Draw(CDC* pDC)
 {
 	// TODO: 여기에 구현 코드 추가.
-	/*
-	CPen pen(PS_SOLID, 2, RGB(255, 0, 0));
-	if (m_selected) {
-		pDC->SelectObject(&pen);
-	}
-	else {
-		pDC->SelectObject(GetStockObject(BLACK_PEN));
-	}
-	*/
 	CImage img;
-	img.Load(m_path);  // 경로 지정 위해
+	img.Load(m_path); 
 	img.Draw(*pDC, m_pos.x, m_pos.y);
 
-	pDC->DrawText(m_name, CRect(m_pos.x, m_pos.y+100, m_pos.x+100, m_pos.y+150), DT_CENTER);  //텍스트 지정 위해
+	pDC->DrawText(m_name, CRect(m_pos.x, m_pos.y+100, m_pos.x+100, m_pos.y+150), DT_CENTER); 
 
 	//pDC->Rectangle(m_pos.x, m_pos.y, m_pos.x+m_width, m_pos.y+m_height);
 }
