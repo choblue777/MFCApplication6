@@ -62,12 +62,12 @@ CMFCApplication6View::CMFCApplication6View() noexcept
 		
 	str.Format(L"현재 점수: %d", num);
 	// 11
-	TrashCan[0].Load(L"./res/E-WASTE1-removebg.png");
-	TrashCan[1].Load(L"./res/GLASS-removebg.png");
-	TrashCan[2].Load(L"./res/METAL-removebg.png");
-	TrashCan[3].Load(L"./res/ORGANIC-removebg.png");
-	TrashCan[4].Load(L"./res/PAPER-removebg.png");
-	TrashCan[5].Load(L"./res/PLASTIC-removebg.png");
+	TrashCan[0].Load(L"./res/E-WASTE-removebg-preview.png");
+	TrashCan[1].Load(L"./res/GLASS-removebg-preview.png");
+	TrashCan[2].Load(L"./res/METAL-removebg-preview.png");
+	TrashCan[3].Load(L"./res/ORGANIC-removebg-preview.png");
+	TrashCan[4].Load(L"./res/PAPER-removebg-preview.png");
+	TrashCan[5].Load(L"./res/PLASTIC-removebg-preview.png");
 
 	for (int i = 0; i < 6; i++)
 	{
