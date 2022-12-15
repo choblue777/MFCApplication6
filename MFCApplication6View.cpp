@@ -45,7 +45,7 @@ CMFCApplication6View::CMFCApplication6View() noexcept
 	CString pt[13] = { L"./res/pet.png", L"./res/alumin.png", L"./res/gas.png", L"./res/glass.png", L"./res/banana.png", L"./res/wm.png",
 		L"./res/cabo.png", L"./res/shaver.png", L"./res/hammer.png", L"./res/um.png", L"./res/mouse.png", L"./res/phone.png", L"./res/sten.png" };   // 이미지 경로 배열
 
-	CString na[13] = { L"페트병", L"알루미늄", L"가스", L"유리", L"바나나", L"수박", L"골판지", L"면도기", L"망치", L"우산", L"마우스", L"전화기", L"스텐" };  //이름 배열
+	CString na[13] = { L"페트병", L"알루미늄", L"가스", L"유리병", L"바나나", L"수박", L"골판지", L"면도기", L"망치", L"우산", L"마우스", L"전화기", L"스텐" };  //이름 배열
 
 	for (size_t i = 0; i <13; i++) { 
 		obj[i] = CRectObject(CPoint(750, 500), 100, 100, pt[i], na[i]);
