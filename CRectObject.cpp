@@ -30,10 +30,11 @@ bool CRectObject::CheckSelected(CPoint pt)
 void CRectObject::Draw(CDC* pDC)
 {
 	// TODO: 여기에 구현 코드 추가.
+	//-----------------------------------조시온
 	CImage img;
 	img.Load(m_path); 
 	img.Draw(*pDC, m_pos.x, m_pos.y);
-
+	//-----------------------------------조시온
 	pDC->DrawText(m_name, CRect(m_pos.x, m_pos.y+100, m_pos.x+100, m_pos.y+150), DT_CENTER); 
 
 	//pDC->Rectangle(m_pos.x, m_pos.y, m_pos.x+m_width, m_pos.y+m_height);
