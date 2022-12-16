@@ -15,6 +15,11 @@
 #include "MFCApplication6Doc.h"
 #include "MFCApplication6View.h"
 
+#pragma comment(lib, "winmm")  
+#include <mmsystem.h>  
+
+CString bgSoundPath = (L"./bgm.wav"); 
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -61,7 +66,9 @@ CMFCApplication6View::CMFCApplication6View() noexcept
 		exit(0);
 		
 	str.Format(L"현재 점수: %d", num);
-	// 11
+	
+	PlaySound(L"./bgm.wav", AfxGetInstanceHandle(), SND_ASYNC | SND_LOOP | SND_NOSTOP);
+	
 	TrashCan[0].Load(L"./res/E-WASTE-removebg-preview.png");
 	TrashCan[1].Load(L"./res/GLASS-removebg-preview.png");
 	TrashCan[2].Load(L"./res/METAL-removebg-preview.png");
@@ -197,6 +204,7 @@ void CMFCApplication6View::OnLButtonUp(UINT nFlags, CPoint point)
 	{
 		if (order >= 12) {
 			MessageBox(_T("수고하셨습니다."));
+			PlaySound(NULL, AfxGetInstanceHandle(), NULL);
 			exit(0);
 		}
 
