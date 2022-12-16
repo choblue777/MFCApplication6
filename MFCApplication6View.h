@@ -42,6 +42,7 @@ protected:
 public:
 	//bool m_selected;
 	CRectObject obj[13];
+	CRectObject hint;
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	int m_index;
