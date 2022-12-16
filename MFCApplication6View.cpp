@@ -18,7 +18,7 @@
 #pragma comment(lib, "winmm")  
 #include <mmsystem.h>  
 
-CString bgSoundPath = (L"./bgm.mp3"); 
+CString bgSoundPath = (L"./bgm.wav"); 
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
