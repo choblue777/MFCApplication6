@@ -47,10 +47,10 @@ CMFCApplication6View::CMFCApplication6View() noexcept
 {
 	// TODO: 여기에 생성 코드를 추가합니다..
 	
-	CString pt[13] = { L"./res/pet.png", L"./res/alumin.png", L"./res/gas.png", L"./res/glass.png", L"./res/banana.png", L"./res/wm.png",
+	CString pt[13] = { L"./res/pet.png", L"./res/hanger.png", L"./res/gas.png", L"./res/glass.png", L"./res/banana.png", L"./res/wm.png",
 		L"./res/cabo.png", L"./res/shaver.png", L"./res/hammer.png", L"./res/um.png", L"./res/mouse.png", L"./res/phone.png", L"./res/sten.png" };   // 이미지 경로 배열
 
-	CString na[13] = { L"페트병", L"알루미늄", L"가스", L"유리병", L"바나나", L"수박", L"골판지", L"면도기", L"망치", L"우산", L"마우스", L"전화기", L"스텐" };  //이름 배열
+	CString na[13] = { L"페트병", L"철사 옷걸이", L"가스통", L"유리병", L"바나나 껍질", L"수박 껍질", L"골판지", L"면도기", L"망치", L"우산대", L"마우스", L"전화기", L"스텐 그릇" };  //이름 배열
 
 	for (size_t i = 0; i <13; i++) { 
 		obj[i] = CRectObject(CPoint(750, 500), 100, 100, pt[i], na[i]);
@@ -60,6 +60,8 @@ CMFCApplication6View::CMFCApplication6View() noexcept
 	num = 0;
 	order = 0;
 
+	hint = CRectObject(CPoint(50, 450), 200, 200, L"./res/hint.png", NULL);
+	
 	MessageBox(_T("안녕하세요, 환경에 일조하조입니다."));
 
 	if (AfxMessageBox(_T("분리수거 게임을 시작하시겠습니까?",), MB_YESNO | MB_ICONQUESTION) == IDNO)
@@ -120,6 +122,7 @@ void CMFCApplication6View::OnDraw(CDC* pDC)
 	}
 
 	obj[order].Draw(pDC);
+	hint.Draw(pDC);
 	pDC->TextOut(1000, 0, str);
 }
 
@@ -186,7 +189,8 @@ void CMFCApplication6View::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	if (m_index != -1) { 
-		obj[m_index].m_pos = point;
+		obj[m_index].m_pos.x = point.x - 50;
+		obj[m_index].m_pos.y = point.y - 50;
 		Invalidate(false);
 	}
 	CView::OnMouseMove(nFlags, point);
@@ -215,7 +219,51 @@ void CMFCApplication6View::OnLButtonUp(UINT nFlags, CPoint point)
 		str.Format(L"현재 점수: %d", num);
 		Invalidate();
 	}
-	
+	else if (hint.CheckSelected(point) == true) {
+		switch (order)
+		{
+		case 0:
+			MessageBox(_T("힌트: 병의 소재는 플리에틸렌입니다."));
+			break;
+		case 1:
+			MessageBox(_T("힌트: 철사가 뭘로 만들어졌을까?"));
+			break;
+		case 2:
+			MessageBox(_T("힌트: 가스를 빼면 캔류로 분리 가능합니다."));
+			break;
+		case 3:
+			MessageBox(_T("힌트: 유리는 영어로?"));
+			break;
+		case 4:
+			MessageBox(_T("힌트: 먹고 남은 '음식'"));
+			break;
+		case 5:
+			MessageBox(_T("힌트: 먹고 남은 '음식'"));
+			break;
+		case 6:
+			MessageBox(_T("힌트: 골판지의 '지'는?"));
+			break;
+		case 7:
+			MessageBox(_T("힌트: 일반 면도기와 가장 큰 차이는?"));
+			break;
+		case 8:
+			MessageBox(_T("힌트: 손잡이때문에 헷갈리지만 머리 부분을 봐야한다."));
+			break;
+		case 9:
+			MessageBox(_T("힌트: 가림막은 일반, 플라스틱으로 분류 가능하지만 대는 다르다."));
+			break;
+		case 10:
+			MessageBox(_T("힌트: 겉보기와 달리 수많은 부품이 들어간다."));
+			break;
+		case 11:
+			MessageBox(_T("힌트: 전화를 할 수 있는 '기계'"));
+			break;
+		case 12:
+			MessageBox(_T("힌트: 스텐은 스테인리스강의 줄임말이다."));
+			break;
+		}
+		
+	}
 	else {
 		obj[order].m_pos.x = 750;
 		obj[order].m_pos.y = 500;
