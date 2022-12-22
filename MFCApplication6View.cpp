@@ -14,12 +14,12 @@
 
 #include "MFCApplication6Doc.h"
 #include "MFCApplication6View.h"
-//-----------------------------------조시온
+
 #pragma comment(lib, "winmm")  
 #include <mmsystem.h>  
 
 CString bgSoundPath = (L"./bgm.wav"); 
-//-----------------------------------조시온
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -46,7 +46,7 @@ END_MESSAGE_MAP()
 CMFCApplication6View::CMFCApplication6View() noexcept
 {
 	// TODO: 여기에 생성 코드를 추가합니다..
-	//-----------------------------------조시온
+
 	CString pt[13] = { L"./res/pet.png", L"./res/hanger.png", L"./res/gas.png", L"./res/glass.png", L"./res/banana.png", L"./res/wm.png",
 		L"./res/cabo.png", L"./res/shaver.png", L"./res/hammer.png", L"./res/um.png", L"./res/mouse.png", L"./res/phone.png", L"./res/sten.png" };   // 이미지 경로 배열
 
@@ -54,7 +54,7 @@ CMFCApplication6View::CMFCApplication6View() noexcept
 
 	for (size_t i = 0; i <13; i++) { 
 		obj[i] = CRectObject(CPoint(750, 500), 100, 100, pt[i], na[i]);
-	}//-----------------------------------조시온
+	}
 	m_stack = 0;
 	m_index = -1;
 	num = 0;
@@ -208,9 +208,7 @@ void CMFCApplication6View::OnLButtonUp(UINT nFlags, CPoint point)
 	{
 		if (order >= 12) {
 			MessageBox(_T("수고하셨습니다."));
-			//-----------------------------------조시온
 			PlaySound(NULL, AfxGetInstanceHandle(), NULL);
-			//-----------------------------------조시온
 			exit(0);
 		}
 
